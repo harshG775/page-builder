@@ -35,14 +35,28 @@ export function Render<T extends Record<string, any>>({
     };
 }) {
     const { content } = data;
+
+    if (!content || content.length === 0) {
+        return <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>No content to display</div>;
+    }
+
     return (
         <>
-            {content?.map((block, i) => {
+            {content.map((block) => {
                 const component = config.components[block.type as keyof T];
+
                 if (!component) {
                     return (
-                        <div key={i} style={{ color: "red" }}>
-                            Unknown block: {block.type}
+                        <div
+                            key={block.id}
+                            style={{
+                                color: "red",
+                                padding: "10px",
+                                border: "1px solid red",
+                                margin: "5px 0",
+                            }}
+                        >
+                            Unknown block type: {block.type}
                         </div>
                     );
                 }
@@ -53,7 +67,25 @@ export function Render<T extends Record<string, any>>({
                     ...(block.props ?? {}),
                 } as T[BlockKey];
 
-                return <Fragment key={block.id}>{component.render(props)}</Fragment>;
+                // Simple try-catch for error handling
+                try {
+                    return <Fragment key={block.id}>{component.render(props)}</Fragment>;
+                } catch (error) {
+                    console.error(`Error rendering block ${block.type}:`, error);
+                    return (
+                        <div
+                            key={block.id}
+                            style={{
+                                color: "orange",
+                                padding: "10px",
+                                border: "1px solid orange",
+                                margin: "5px 0",
+                            }}
+                        >
+                            Error rendering: {block.type}
+                        </div>
+                    );
+                }
             })}
         </>
     );
