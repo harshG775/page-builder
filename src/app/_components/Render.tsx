@@ -1,14 +1,6 @@
 import React, { Fragment } from "react";
 
-type FieldType = "text" | "number" | "select" | "boolean";
-
-type FieldConfig = {
-    type: FieldType;
-    options?: string[];
-};
-
 type ComponentConfig<Props> = {
-    fields: Record<keyof Props, FieldConfig>;
     defaultProps: Props;
     render: (props: Props) => React.ReactNode;
 };

@@ -13,10 +13,7 @@ const data = {
             {
                 id: "navbar-1",
                 type: "Navbar",
-                props: {
-                    brand: "MySite",
-                    links: ["Home", "About", "Contact"],
-                },
+               
             },
             {
                 id: "hero-1",
@@ -25,7 +22,36 @@ const data = {
                     title: "Welcome to Our Site",
                     subtitle: "We build amazing products with React and Tailwind",
                     buttonText: "Get Started",
-                    buttonUrl: "#",
+                    buttonUrl: "#features",
+                },
+            },
+            {
+                id: "features-1",
+                type: "Features",
+                props: {
+                    items: [
+                        { title: "Fast", description: "Our platform is optimized for speed." },
+                        { title: "Secure", description: "We take security seriously." },
+                        { title: "Scalable", description: "Built to grow with your business." },
+                    ],
+                },
+            },
+            {
+                id: "testimonials-1",
+                type: "Testimonials",
+                props: {
+                    quotes: [
+                        { name: "Alice", text: "This service changed the way we work." },
+                        { name: "Bob", text: "A must-have for modern businesses." },
+                    ],
+                },
+            },
+            {
+                id: "footer-1",
+                type: "Footer",
+                props: {
+                    brand: "MySite",
+                    year: "2025",
                 },
             },
         ],
