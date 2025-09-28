@@ -7,13 +7,13 @@ const data = {
         root: {
             props: {
                 title: "Testing Title",
+                description: "Testing description",
             },
         },
         content: [
             {
                 id: "navbar-1",
                 type: "Navbar",
-               
             },
             {
                 id: "hero-1",
@@ -62,6 +62,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const pageData = data?.["/"];
     return {
         title: pageData.root.props?.title,
+        description: pageData.root.props?.description,
     };
 }
 export default function Home() {

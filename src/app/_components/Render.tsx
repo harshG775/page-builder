@@ -12,19 +12,20 @@ export type Config<T extends Record<string, any>> = {
 };
 
 // RENDER
-export function Render<T extends Record<string, any>>({
+export type Data<Components = Record<string, any>> = {
+    root: { props: {} };
+    content: {
+        id: string;
+        type: string;
+        props?: Partial<Components[keyof Components]>;
+    }[];
+};
+export function Render<Components extends Record<string, any>>({
     config,
     data,
 }: {
-    config: Config<T>;
-    data: {
-        root: { props: {} };
-        content: {
-            id: string;
-            type: string;
-            props?: Partial<T[keyof T]>;
-        }[];
-    };
+    config: Config<Components>;
+    data: Data<Components>;
 }) {
     const { content } = data;
 
@@ -35,7 +36,7 @@ export function Render<T extends Record<string, any>>({
     return (
         <>
             {content.map((block) => {
-                const component = config.components[block.type as keyof T];
+                const component = config.components[block.type as keyof Components];
 
                 if (!component) {
                     return (
@@ -53,11 +54,11 @@ export function Render<T extends Record<string, any>>({
                     );
                 }
 
-                type BlockKey = keyof T;
+                type BlockKey = keyof Components;
                 const props = {
                     ...component.defaultProps,
                     ...(block.props ?? {}),
-                } as T[BlockKey];
+                } as Components[BlockKey];
 
                 // Simple try-catch for error handling
                 try {

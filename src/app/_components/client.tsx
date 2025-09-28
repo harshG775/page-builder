@@ -1,18 +1,7 @@
 "use client";
 import { config } from "./config";
-import { Render } from "./Render";
+import { Data, Render } from "./Render";
 
-export function Client({
-    data,
-}: {
-    data: {
-        root: { props: {} };
-        content: {
-            id: string;
-            type: string;
-            props?: any;
-        }[];
-    };
-}) {
+export function Client({ data }: { data: Data }) {
     return <Render config={config} data={data} />;
 }
