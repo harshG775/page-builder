@@ -1,4 +1,4 @@
-import { Config } from "./Render";
+import { Config } from "./lib/Render";
 
 type Props = {
     Navbar: {

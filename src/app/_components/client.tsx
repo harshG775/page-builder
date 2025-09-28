@@ -1,6 +1,6 @@
 "use client";
-import { config } from "./config";
-import { Data, Render } from "./Render";
+import { config } from "../../puck/config";
+import { Data, Render } from "../../puck/lib/Render";
 
 export function Client({ data }: { data: Data }) {
     return <Render config={config} data={data} />;
